@@ -6,6 +6,7 @@
 #include "TimerManager.h"
 #include "FPSGameMode.h"
 #include "Net/UnrealNetwork.h"
+#include "Engine/World.h"
 
 // Sets default values
 AFPSAIGuard::AFPSAIGuard()

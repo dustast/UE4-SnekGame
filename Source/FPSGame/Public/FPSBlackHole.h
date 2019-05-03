@@ -8,6 +8,7 @@
 
 class UStaticMeshComponent;
 class USphereComponent;
+
 UCLASS()
 class FPSGAME_API AFPSBlackHole : public AActor
 {

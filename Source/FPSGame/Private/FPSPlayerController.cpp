@@ -3,15 +3,16 @@
 #include "FPSPlayerController.h"
 #include "FPSBlackHole.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 
 bool AFPSPlayerController::InputKey(FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad)
 {
-	Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
+	
 
 	     // Only bother with presses (not releases) and don't worry about mouse button events
-     if (InputType == EInputEvent::IE_Pressed && Key.IsMouseButton() == false)
+     if (EventType == EInputEvent::IE_Pressed)
      {
-         // Clear the CodeSequence string if the last key press was more than 2 seconds ago
+         // Clear the CodeSequence string if the last key press was more than 1 seconds ago
          ResetExpiredCodeSequence();  // in case it's not clear, this is another custom function
  
          // float TimeOfLastKeyPress is a float variable that you'll also set up in your Player Controller class
@@ -24,9 +25,9 @@ bool AFPSPlayerController::InputKey(FKey Key, EInputEvent EventType, float Amoun
          CheckCodeSequence();
      }
      
-     // Return a bool by calling the Super version of this function
-     return Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
-
+     
+	 // Return a bool by calling the Super version of this function
+	 return Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
 
  }
  
@@ -35,10 +36,10 @@ void AFPSPlayerController::ResetExpiredCodeSequence()
 	// Find out how many seconds has passed since the last key press
 	float TimeSinceLastKeyPress = GetGameTimeSinceCreation() - TimeOfLastKeyPress;
 
-	bool bSequenceExpired = TimeSinceLastKeyPress > 2.0f;  // arbitrarily choosing 2 seconds for this example
+	bool bSequenceExpired = TimeSinceLastKeyPress > 1.0f;  // 1 second till reset
 	if (bSequenceExpired)
 	{
-		// If more than 2 seconds has passed since the last key press, reset the string; otherwise, don't do anything
+		// If more than 1 seconds has passed since the last key press, reset the string; otherwise, don't do anything
 		CodeSequence = "";    // reset the string back to a blank, empty string
 	}
 }
@@ -48,11 +49,19 @@ void AFPSPlayerController::CheckCodeSequence()
 {
 	if (CodeSequence == "EZGAME")
 	{
-		// Do something to handle this match, e.g. spawn your actor(s)
+		UE_LOG(LogTemp, Warning, TEXT("Wokrkinge"))
+		FActorSpawnParameters BlackSpawnParams;
+		BlackSpawnParams.Owner = this;
+		BlackSpawnParams.Instigator = Instigator;
+		GetWorld()->SpawnActor<AFPSBlackHole>(BlackClass, FVector(0.f, 0.f, 1000.f), FRotator::ZeroRotator, BlackSpawnParams);
 	}
-	else if (CodeSequence == "EXAMPLE2")
+	else if (CodeSequence == "WAY2EZ")
 	{
-		// Just another example to show that you can handle more than one match possibility
+		UE_LOG(LogTemp, Warning, TEXT("Wokrkinge"))
+		FActorSpawnParameters BlackSpawnParams;
+		BlackSpawnParams.Owner = this;
+		BlackSpawnParams.Instigator = Instigator;
+		GetWorld()->SpawnActor<AFPSBlackHole>(BlackClass, FVector(0.f, 0.f, 1000.f), FRotator::ZeroRotator, BlackSpawnParams);;// Just another example to show that you can handle more than one match possibility
 	}
 	// etc.
 }

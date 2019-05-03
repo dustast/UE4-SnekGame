@@ -6,6 +6,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "FPSGameState.h"
+#include "Engine/World.h"
 
 AFPSGameMode::AFPSGameMode()
 {

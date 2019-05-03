@@ -9,17 +9,19 @@
 #include "Components/PawnNoiseEmitterComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "FPSBlackHole.h"
-
+#include "Runtime/Engine/Classes/Animation/AnimSequence.h"
+#include "Engine/World.h"
 
 void AFPSCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	FActorSpawnParameters BlackSpawnParams;
-	BlackSpawnParams.Owner = this;
-	BlackSpawnParams.Instigator = Instigator;
+	//FActorSpawnParameters BlackSpawnParams;
+	//BlackSpawnParams.Owner = this;
+	//BlackSpawnParams.Instigator = Instigator;
 
 
-		GetWorld()->SpawnActor<AFPSBlackHole>(BlackClass, FVector(0.f, 0.f, 1000.f), FRotator::ZeroRotator, BlackSpawnParams);
+
+	//GetWorld()->SpawnActor<AFPSBlackHole>(BlackClass, FVector(0.f, 0.f, 1000.f), FRotator::ZeroRotator, BlackSpawnParams);
 
 
 
@@ -55,8 +57,8 @@ void AFPSCharacter::ServerFire_Implementation()
 	// try and fire a projectile
 	if (ProjectileClass)
 	{
-		FVector MuzzleLocation = GunMeshComponent->GetSocketLocation("Muzzle");
-		FRotator MuzzleRotation = GunMeshComponent->GetSocketRotation("Muzzle");
+		FVector  const MuzzleLocation = GunMeshComponent->GetSocketLocation("Muzzle");
+		FRotator const MuzzleRotation = GunMeshComponent->GetSocketRotation("Muzzle");
 
 		//Set Spawn Collision Handling Override
 		FActorSpawnParameters ActorSpawnParams;

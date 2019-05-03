@@ -2,6 +2,7 @@
 
 #include "FPSGameState.h"
 #include "FPSPlayerController.h"
+#include "Engine/World.h"
 
 void AFPSGameState::MultiCastOnMissionComplete_Implementation(APawn* InstigatorPawn, bool bIsMissionSuccess)
 {

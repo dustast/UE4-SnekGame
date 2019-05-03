@@ -70,8 +70,8 @@ public:
 	
 
 protected:
-		UFUNCTION(Server, Reliable, WithValidation)
-		void ServerFire();
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerFire();
 
 	/** Fires a projectile. */
 	void Fire();
@@ -82,7 +82,6 @@ protected:
 	/** Handles strafing movement, left and right */
 	void MoveRight(float Val);
 
-	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	
 
 public:
@@ -93,5 +92,6 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return CameraComponent; }
 
 	virtual void Tick(float DeltaTime) override;
-};
 
+	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+};
