@@ -36,7 +36,7 @@ void AFPSPlayerController::ResetExpiredCodeSequence()
 	// Find out how many seconds has passed since the last key press
 	float TimeSinceLastKeyPress = GetGameTimeSinceCreation() - TimeOfLastKeyPress;
 
-	bool bSequenceExpired = TimeSinceLastKeyPress > 1.0f;  // 1 second till reset
+	bool bSequenceExpired = TimeSinceLastKeyPress > 0.75f;  // 1 second till reset
 	if (bSequenceExpired)
 	{
 		// If more than 1 seconds has passed since the last key press, reset the string; otherwise, don't do anything
@@ -55,7 +55,7 @@ void AFPSPlayerController::CheckCodeSequence()
 		BlackSpawnParams.Instigator = Instigator;
 		GetWorld()->SpawnActor<AFPSBlackHole>(BlackClass, FVector(0.f, 0.f, 1000.f), FRotator::ZeroRotator, BlackSpawnParams);
 	}
-	else if (CodeSequence == "WAY2EZ")
+	else if (CodeSequence == "URBOTS")
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Wokrkinge"))
 		FActorSpawnParameters BlackSpawnParams;
